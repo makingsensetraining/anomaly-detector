@@ -25,6 +25,12 @@ This project is currently under development and taking its very first steps. Fea
     conda env create -f anomaly-detector.yml
     ```
 
+    However, if you already had the environment and you just need to update the dependencies, run:
+
+    ```sh
+    conda env update -f anomaly-detector.yml
+    ```
+
 - Activate the environment and get hacking!
 
     ```sh
