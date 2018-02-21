@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: continuumio/anaconda3
+    working_directory: ~/src
+    steps:
+      - checkout
+
+      - run:
+          name: create conda environment
+          command: |
+            conda env create -f anomaly-detector.yaml
+
+      - run:
+          name: run tests
+          command: |
+            source activate anomaly-detector
+            ./runTests.sh
