@@ -8,6 +8,16 @@ jobs:
       - checkout
 
       - run:
+          name: setup conda channels
+          command: |
+            conda config --append default_channels https://repo.continuum.io/pkgs/main
+            conda config --append default_channels https://repo.continuum.io/pkgs/free
+            conda config --append default_channels https://repo.continuum.io/pkgs/r
+            conda config --append default_channels https://repo.continuum.io/pkgs/pro
+            conda config --append default_channels https://repo.continuum.io/pkgs/msys2
+            conda config --append channels intel
+
+      - run:
           name: create conda environment
           command: |
             conda env create -f anomaly-detector.yml
