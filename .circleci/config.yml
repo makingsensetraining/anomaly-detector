@@ -26,4 +26,4 @@ jobs:
           name: run tests
           command: |
             source activate anomaly-detector
-            ./runTests.sh
+            python -m unittest discover -p "Test*.py" -s ./src/detectors
