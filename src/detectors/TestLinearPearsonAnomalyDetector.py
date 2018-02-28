@@ -45,8 +45,13 @@ class TestLinearPearsonAnomalyDetector(unittest.TestCase):
         self.assertTrue(self.__is_anomalous_from_dataset([1, 2, 3, 4, 5, 6], 8))
         self.assertTrue(self.__is_anomalous_from_dataset([2, 3, 4, 5, 6, 7], 6))
         self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 6, 8], 7))
+        self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 6, 8, 10, 12, 14], 25))
+        self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 6, 8, 10, 12, 14], 15))
+        self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 6, 8, 10, 12, 14], 6))
         self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 5, 7, 9, 11, 12, 14], 17))
         self.assertTrue(self.__is_anomalous_from_dataset([2, 4, 5, 7, 9, 11, 12, 14], 14))
+        self.assertTrue(self.__is_anomalous_from_dataset([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 15))
+        self.assertTrue(self.__is_anomalous_from_dataset([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1))
 
 if __name__ == '__main__':
     unittest.main()
