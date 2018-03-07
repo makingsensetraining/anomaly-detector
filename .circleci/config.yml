@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: continuumio/anaconda3
+    working_directory: ~/src
+    steps:
+      - checkout
+
+      - run:
+          name: setup conda channels
+          command: |
+            conda config --append default_channels https://repo.continuum.io/pkgs/main
+            conda config --append default_channels https://repo.continuum.io/pkgs/free
+            conda config --append default_channels https://repo.continuum.io/pkgs/r
+            conda config --append default_channels https://repo.continuum.io/pkgs/pro
+            conda config --append default_channels https://repo.continuum.io/pkgs/msys2
+            conda config --append channels intel
+
+      - run:
+          name: create conda environment
+          command: |
+            conda env create -f anomaly-detector.yml
+
+      - run:
+          name: run tests
+          command: |
+            source activate anomaly-detector
+            python -m unittest discover -p "Test*.py" -s ./src/detectors
