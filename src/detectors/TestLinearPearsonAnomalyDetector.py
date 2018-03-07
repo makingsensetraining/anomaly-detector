@@ -8,26 +8,12 @@ class TestLinearPearsonAnomalyDetector(unittest.TestCase):
         self.assertIsNotNone(sut)
         return sut
 
-    def test_is_model_suitable_false_on_constant(self):
+    def test_train_returns_level_of_confidence(self):
         sut = self.__get_detector()
 
-        self.assertFalse(sut.is_model_suitable([0]))
-        self.assertFalse(sut.is_model_suitable([1, 1]))
-
-    def test_is_model_suitable_linear(self):
-        sut = self.__get_detector()
-
-        self.assertTrue(sut.is_model_suitable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
-        self.assertTrue(sut.is_model_suitable([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]))
-        self.assertTrue(sut.is_model_suitable([2, 4, 6, 8, 10]))
-
-    def test_is_model_suitable_non_linear(self):
-        sut = self.__get_detector()
-
-        self.assertFalse(sut.is_model_suitable([2, 4, 8, 16, 32, 64, 128, 256]))
-        self.assertFalse(sut.is_model_suitable([2, 4, 6, 8, 10, 8, 6, 4, 2]))
-        self.assertFalse(sut.is_model_suitable([2, 2, 2, 2, 2, 2]))
-        self.assertFalse(sut.is_model_suitable([2, 4, 6, 8, 10, 12, 5]))
+        self.assertEqual(1, sut.train([1, 2, 3, 4, 5, 6]))
+        self.assertEqual(1, sut.train([6, 5, 4, 3, 2, 1]))
+        self.assertEqual(0, sut.train([81, 27, 9, 3, 1, 3, 9, 27, 81]))
 
     def __is_anomalous_from_dataset(self, dataset, new_value):
         sut = self.__get_detector()

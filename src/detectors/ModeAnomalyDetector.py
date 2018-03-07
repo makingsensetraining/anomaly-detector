@@ -2,7 +2,7 @@ import pandas as pd
 
 class ModeAnomalyDetector:
     def __init__(self):
-        self.constant_value = float('nan')
+        self.constant_value = None
 
     def train(self, values):
         dataframe = pd.DataFrame(values)
